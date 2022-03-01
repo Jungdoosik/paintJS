@@ -1,4 +1,5 @@
 const canvas = document.getElementById("jsCanvas");
+const colors = document.getElementsByClassName("jsColor");
 
 const ctx = canvas.getContext("2d");
 
@@ -34,7 +35,12 @@ function onMousedown(event){
     painting = true;
 }
 
-
+function handleColorClick(event){
+    //console.log(event.target.style); 개발자도구에서 target에 대한 설정을 볼수있음(그래서 찾은값(backgroundColor))
+    const color = event.target.style.backgroundColor;
+    console.log(typeof color);
+    ctx.strokStyle = color;
+}
 
 if(canvas){
     canvas.addEventListener("mousemove", onMouseMove);
@@ -42,3 +48,6 @@ if(canvas){
     canvas.addEventListener("mouseup", stopPainting);
     canvas.addEventListener("mouseleave", stopPainting);
 }
+
+Array.from(colors).forEach(color => color.addEventListener("click", handleColorClick));
+//HTML Collection으로 받아오는걸 Array로 받아주는 구문(Array.from)
